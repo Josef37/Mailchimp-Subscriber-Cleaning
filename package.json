@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "bin": {
+    "mc-clean": "./bin/index.js"
+  },
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Josef Wittmann",
