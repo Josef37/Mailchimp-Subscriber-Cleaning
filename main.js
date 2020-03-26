@@ -6,10 +6,10 @@
  * - prompt (with inquirer)
  */
 const settings = {
-  campaignDate: new Date('2020-03-25'),
-  campaignTitle: 'Inaktive Abonnenten Entfernen',
-  tagName: 'Inactive',
-  confirmationUrl: 'createrawvision.de/newsletter-abo-bestaetigt'
+  campaignDate: new Date('2020-03-25'), // exact sending day (don't set time)
+  campaignTitle: 'Inaktive Abonnenten Entfernen', // exact campaign title
+  tagName: 'Inactive', // exact tag name
+  confirmationUrl: 'createrawvision.de/newsletter-abo-bestaetigt' // substring of the url
 }
 
 const axois = require('axios').default
