@@ -23,3 +23,7 @@ I didn't have a good feeling just deleting inactive subscribers... And there are
 1. Run the script either locally (`npm start` or `node main`) or globally (first run `npm link` once and the `mc-clean`)
 1. Confirm that you want to archive the subscribers
 1. Wait for the batch process to finish
+
+# License
+
+This project is licensed under the terms of the MIT license.
