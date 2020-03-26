@@ -2,7 +2,7 @@
 
 Use this script to archive your inactive MailChimp subscribers, by sending a confirmation e-mail and then deleting users, who didn't respond.
 
-## Why use script?
+## Why use this script?
 
 I didn't have a good feeling just deleting inactive subscribers... And there are people who won't get tracked because they don't accept images in their e-mail client. So I designed this script go the safe way.
 
