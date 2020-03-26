@@ -5,7 +5,6 @@ require('dotenv').config()
 const API_KEY = process.env.MAILCHIMP_API_KEY
 if (!API_KEY) throw new Error('No API Key provided')
 const dc = API_KEY.split('-').reverse()[0]
-
 const args = process.argv.slice(2)
 const DRY_RUN = args.some(arg => ['-d', '--dry'].includes(arg))
 const FORCE_DELETE = args.some(arg => ['-f', '--force'].includes(arg))
@@ -107,9 +106,14 @@ const archiveMembers = async (listId, memberIds) => {
     const confirmDelete = await prompt.run()
     if (!confirmDelete) return
   }
-  for (const memberId of memberIds) {
-    api.delete(`/lists/${listId}/members/${memberId}`)
-  }
+  const { data: { id: batchId } } = await api.post('/batches', {
+    operations: memberIds.map(memberId => ({
+      method: 'DELETE',
+      path: `/lists/${listId}/members/${memberId}`,
+      operation_id: String(memberId)
+    }))
+  })
+  return batchId
 }
 
 (async () => {
@@ -137,5 +141,6 @@ const archiveMembers = async (listId, memberIds) => {
   members.forEach(({ id, emailAddress }) => membersMap.set(id, emailAddress))
   membersClicked.forEach(member => membersMap.delete(member.id))
 
-  await archiveMembers(listId, [...membersMap.keys()])
+  const batchId = await archiveMembers(listId, [...membersMap.keys()])
+  console.log(`Archiving members by batch operation with ID ${batchId}`)
 })()
